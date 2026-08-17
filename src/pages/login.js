@@ -15,6 +15,15 @@ const Login = () => {
 
   // const navigation = useNavigation()
 
+  const handleLogin = () => {
+    if(email === "ale" && password === "123"){
+      // navigation.navigate("main")
+    }else{
+      Alert.alert("E-mail ou senha inválidos!")
+    }
+  }
+
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -29,7 +38,7 @@ const Login = () => {
         value={password}
         onChange={setPassword}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
     </View>
@@ -68,3 +77,4 @@ const styles = StyleSheet.create({
 });
 
 export default Login;
+
