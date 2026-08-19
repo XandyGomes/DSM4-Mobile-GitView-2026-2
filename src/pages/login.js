@@ -13,11 +13,11 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
 
   const handleLogin = () => {
     if(email === "ale" && password === "123"){
-      // navigation.navigate("main")
+      navigation.navigate("main")
     }else{
       Alert.alert("E-mail ou senha inválidos!")
     }
