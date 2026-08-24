@@ -13,16 +13,15 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const handleLogin = () => {
-    if(email === "ale" && password === "123"){
-      navigation.navigate("main")
-    }else{
-      Alert.alert("E-mail ou senha inválidos!")
+    if (email === "ale" && password === "123") {
+      navigation.navigate("main");
+    } else {
+      Alert.alert("E-mail ou senha inválidos!");
     }
-  }
-
+  };
 
   return (
     <View style={styles.container}>
@@ -30,13 +29,13 @@ const Login = () => {
         style={styles.input}
         placeholder="E-mail"
         value={email}
-        onChange={setEmail}
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
         placeholder="Senha"
         value={password}
-        onChange={setPassword}
+        onChangeText={setPassword}
       />
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
@@ -67,14 +66,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     width: "80%",
-    alignItems: "center"
+    alignItems: "center",
   },
-  buttonText:{
+  buttonText: {
     color: "#fff",
-    fontWeight: 'bold',
-    fontSize: 16
-  }
+    fontWeight: "bold",
+    fontSize: 16,
+  },
 });
 
 export default Login;
-
