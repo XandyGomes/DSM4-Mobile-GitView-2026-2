@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Keyboard, ActivityIndicator, View, Text } from "react-native";
+import { Keyboard, ActivityIndicator } from "react-native";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import api from "../services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -25,9 +25,40 @@ export default class Main extends Component {
     loading: false,
   };
 
+  handleAddUser = async () => {
+    try{
+      const {users, newUser} = this.state
+      this.setState({loading: true})
+      const response = await api.get(`/users/${newUser}`)
+    }catch (error){
+      
+    }
+  }
+
   render() {
     const { users, newUser, loading } = this.state;
 
-    return <Container></Container>;
+    return (
+      <Container>
+        <Form>
+          <Input
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Adicionar usuário"
+            value={newUser}
+            onChangeText={(text) => this.setState({newUser: text})}
+            returnKeyType="send"
+            onSubmitEditing={this.handleAddUser}
+          />
+          <SubmitButton loading= {loading} onPress={this.handleAddUser}>
+            {loading ? (<ActivityIndicator color="#fff"/>) : (<Icon name="add-circle"  size={30} color="#fff"/>)}
+          </SubmitButton>
+        </Form>
+      <List 
+        data={users}
+        keyExtractor={(user) => user.login}
+      />
+      </Container>
+    );
   }
 }
