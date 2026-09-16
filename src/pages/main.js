@@ -25,6 +25,20 @@ export default class Main extends Component {
     loading: false,
   };
 
+  async componentDidMount() {
+    const users = await AsyncStorage.getItem("users");
+    if (users) {
+      this.setState({ users: JSON.parse(users) });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { users } = this.state;
+    if (prevState.users !== users) {
+      AsyncStorage.setItem("users", JSON.stringify(users));
+    }
+  }
+
   handleAddUser = async () => {
     try {
       const { users, newUser } = this.state;
@@ -94,7 +108,16 @@ export default class Main extends Component {
               >
                 <ProfileButtonText>Ver perfil</ProfileButtonText>
               </ProfileButton>
-              <ProfileButton style={{backgroundColor: "#FFC0CB"}}>
+              <ProfileButton
+                onPress={() => {
+                  this.setState({
+                    users: this.state.users.filter(
+                      (user) => user.login !== item.login,
+                    ),
+                  });
+                }}
+                style={{ backgroundColor: "#FFC0CB" }}
+              >
                 <ProfileButtonText>Excluir</ProfileButtonText>
               </ProfileButton>
             </User>
